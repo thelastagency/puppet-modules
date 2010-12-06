@@ -18,7 +18,8 @@ class mcollective::client {
     #    ensure   => present,
     #}
 
-	package { "${mcollective::params::packagename_client}": 
+	package { "mcollective_client":
+	   name => "${mcollective::params::packagename_client}",
        provider => rpm, 
        ensure => installed, 
        source => "http://puppetlabs.com/downloads/mcollective/mcollective-client-0.4.10-1.el5.noarch.rpm",
