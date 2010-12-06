@@ -9,8 +9,14 @@ class activemq::redhat {
         ensure => present,
     }
 
+    #package { "activemq-info-provider":
+    #    ensure => present,
+    #}
+
     package { "activemq-info-provider":
-        ensure => present,
+		provider => rpm,
+		source => "http://puppetlabs.com/downloads/mcollective/activemq-info-provider-5.4.0-2.el5.noarch.rpm"
+        ensure => installed,
     }
 
 
