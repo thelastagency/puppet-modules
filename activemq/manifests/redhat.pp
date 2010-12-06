@@ -15,7 +15,7 @@ class activemq::redhat {
 
     package { "activemq-info-provider":
 		provider => rpm,
-		source => "http://puppetlabs.com/downloads/mcollective/activemq-info-provider-5.4.0-2.el5.noarch.rpm"
+		source => "http://puppetlabs.com/downloads/mcollective/activemq-info-provider-5.4.0-2.el5.noarch.rpm",
         ensure => installed,
     }
 
