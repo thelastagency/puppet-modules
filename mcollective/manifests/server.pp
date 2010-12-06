@@ -13,11 +13,18 @@ class mcollective::server {
     require mcollective::params
 
     # Basic Package - Service - Configuration file management
-    package { "mcollective":
-        name     => "${mcollective::params::packagename}",
-        ensure   => present,
-#        require  => Package["stomp"],
-    }
+    #package { "mcollective":
+    #    name     => "${mcollective::params::packagename}",
+    #    ensure   => present,
+    #    require  => Package["stomp"],
+    #}
+
+	package { "${mcollective::params::packagename}": 
+       provider => rpm, 
+       ensure => installed, 
+       source => "http://puppetlabs.com/downloads/mcollective/mcollective-0.4.10-1.el5.noarch.rpm",
+	   require => Package["mcollective-common"],
+	}
 
     package { "stomp":
         name     => "${mcollective::params::packagename_stomp}",

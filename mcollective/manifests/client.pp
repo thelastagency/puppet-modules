@@ -13,10 +13,17 @@ class mcollective::client {
     require mcollective::params
 
     # Basic Package - Configuration file management
-    package { "mcollective_client":
-        name     => "${mcollective::params::packagename_client}",
-        ensure   => present,
-    }
+    #package { "mcollective_client":
+    #    name     => "${mcollective::params::packagename_client}",
+    #    ensure   => present,
+    #}
+
+	package { "${mcollective::params::packagename_client}": 
+       provider => rpm, 
+       ensure => installed, 
+       source => "http://puppetlabs.com/downloads/mcollective/mcollective-client-0.4.10-1.el5.noarch.rpm",
+	   require => Package["mcollective-common"],
+	}
 
     file { "mcollective_client.conf":
         path    => "${mcollective::params::configfile_client}",
