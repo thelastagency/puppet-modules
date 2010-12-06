@@ -15,9 +15,28 @@ class activemq {
     require mcollective::params
 
     # Basic Package - Service - Configuration file management
-    package { "activemq":
+    #package { "activemq":
+    #    name   => "${activemq::params::packagename}",
+    #    ensure => present,
+    #}
+
+	package { "jpackage-utils":
+		ensure => present
+	}
+
+	package { "tanukiwrapper":
+		provider => rpm,
+		source => "http://puppetlabs.com/downloads/mcollective/tanukiwrapper-3.2.3-1jpp.x86_64.rpm",
+		ensure => installed,
+		require => Package["jpackage-utils"]
+	}
+	
+	package { "activemq":
         name   => "${activemq::params::packagename}",
-        ensure => present,
+		provider => rpm,
+		source => "http://puppetlabs.com/downloads/mcollective/activemq-5.4.0-2.el5.noarch.rpm",
+        ensure => installed,
+		require => Package["tanukiwrapper"],
     }
 
     service { "activemq":
